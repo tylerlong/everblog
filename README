@@ -1,23 +1,33 @@
 Introduction
 ************
-Everblog is named after Evernote, the famous note taking application. 
-Everblog is a mini blogging system. It is very easy to setup and use.
-You create and edit your notes in evernote, when finished, publish them to Everblog in two simple steps.
+Everblog is named after Evernote, you can publish your Evernote notes to Everblog as blog entries.
 When the notes in Evernote are updated, corresponding blog entries in Everblog are updated automatically.
 
 
 
-Why Everblog?
-*************
-Taking notes and writing blog entries are similar creative activities.
-From time to time, after writing a good note, I'd like to publish it to my blog. If there is a way to let you do this easily ...
-Create, edit and update your blog entries in Evernote, your favorite note taking application. Doesn't it sounds cool?
-
-
-
-How to deploy?
+Why Everblog ?
 **************
+Taking notes and writing blog entries are similar creative activities. You may want to publish some of your notes as blog entries.
+We already have Evernote, a popular note taking application. It would be nice to have a blogging software which integrates well with Evernote.
+Here comes Everblog!
+
+
+
+How to deploy ?
+***************
 I will write a tutorial, please stay tuned.
+
+
+
+Examples & Demos
+****************
+I am going to setup a demo site at http://blog.tylerlong.me
+
+
+
+License
+*******
+Everblog is released under BSD license.
 
 
 
