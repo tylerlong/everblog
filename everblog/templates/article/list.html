@@ -1,11 +1,15 @@
 {% extends "layout.html" %}
 
-{% block title %}List of blog entries{% endblock %}
+{% block title %}Blog{% endblock %}
 {% block body %}
-<h2>List of blog entries</h2>
-<hr/>
 {% for article in articles %}
-<a href="{{ url_for('article.read', id = article.id) }}">{{ article.title }}</a> - {{ article.created }}<br/>
-{{ article.snippet }}
+<div class=entry-overview>
+    <div class=date>{{ article.created }}</div>
+    <div class=detail>
+        <h1><a href="{{ url_for('article.read', id = article.id) }}">{{ article.title }}</a></h1>
+        <div class=summary><p>{{ article.snippet }}</p>
+    </div>
+    </div>
+</div>
 {% endfor %}
 {% endblock %}

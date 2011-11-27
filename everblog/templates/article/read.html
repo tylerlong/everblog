@@ -3,8 +3,7 @@
 {% block title %}{{ article.title }}{% endblock %}
 
 {% block body %}
-<a href="{{ url_for('article.list') }}">back to list</a><br/>
-<h2>{{ article.title }}</h2>
-<hr/>
+<h1 class="title">{{ article.title }}</h1>
+<p class=date>published on {{ article.created }}</p>
 {{ article.content|safe }}
 {% endblock %}
