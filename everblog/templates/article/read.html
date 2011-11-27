@@ -1,8 +1,10 @@
 {% extends "layout.html" %}
 
-{% block title %}Content of blog entry{% endblock %}
+{% block title %}{{ article.title }}{% endblock %}
 
 {% block body %}
-<h2>Content of blog entry</h2>
-{{ article.evernote_guid }} - {{ article.evernote_key }}
+<a href="{{ url_for('article.list') }}">back to list</a><br/>
+<h2>{{ article.title }}</h2>
+<hr/>
+{{ article.content|safe }}
 {% endblock %}

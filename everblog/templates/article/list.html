@@ -1,10 +1,11 @@
 {% extends "layout.html" %}
 
 {% block title %}List of blog entries{% endblock %}
-
 {% block body %}
 <h2>List of blog entries</h2>
+<hr/>
 {% for article in articles %}
-<a href="{{ url_for('article.read', id = article.id) }}">{{ article.evernote_guid }}</a><br/>
+<a href="{{ url_for('article.read', id = article.id) }}">{{ article.title }}</a> - {{ article.created }}<br/>
+{{ article.snippet }}
 {% endfor %}
 {% endblock %}

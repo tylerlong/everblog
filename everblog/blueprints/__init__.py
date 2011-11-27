@@ -16,4 +16,4 @@ for blueprint in all_blueprints:
     exec('from everblog.blueprints import {0}'.format(blueprint))
 
     #register blueprint to app
-    exec('app.register_blueprint({0}.blueprint, url_prefix = "/{0}")'.format(blueprint)) 
+    exec('app.register_blueprint({0}.blueprint)'.format(blueprint)) 
