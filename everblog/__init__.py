@@ -22,7 +22,17 @@ app.config.update(
     DEBUG = True,
     SECRET_KEY = Encryption.generate_random_string(),
 
-    CONNECTION_STRING = 'sqlite:///everblog.db'
+    CONNECTION_STRING = 'sqlite:///everblog/everblog.db',
+
+    ADMIN_USERNAME = 'admin',
+    ADMIN_PASSWORD = 'password',
+
+    CONTACT_METHODS = [
+        ('email', 'mailto:mituzhishi@gmail.com'),
+        (u'微博', 'http://weibo.com/tylerlong'),
+        ('github', 'https://github.com/tylerlong'),
+        ('bitbucket', 'https://bitbucket.org/tylerlong'),
+    ]
 )
 
 db = Database(app.config['CONNECTION_STRING'])

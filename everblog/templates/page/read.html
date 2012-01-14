@@ -1,0 +1,8 @@
+{% extends "layout.html" %}
+
+{% block title %}{{ page.title }}{% endblock %}
+
+{% block body %}
+<h1 class="title">{{ page.title }}</h1>
+{{ page.content|safe }}
+{% endblock %}

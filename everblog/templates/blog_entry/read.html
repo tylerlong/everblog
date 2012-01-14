@@ -1,0 +1,9 @@
+{% extends "layout.html" %}
+
+{% block title %}{{ blog_entry.title }}{% endblock %}
+
+{% block body %}
+<h1 class="title">{{ blog_entry.title }}</h1>
+<p class=date>published on {{ blog_entry.created }}</p>
+{{ blog_entry.content|safe }}
+{% endblock %}

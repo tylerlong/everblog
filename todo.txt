@@ -1,0 +1,11 @@
+1. make the html pages fully html5. (header, footer, article, aside ...etc)
+
+2. make it online!
+
+4. cron job to synchronize blog entries automatically.
+
+5. httplib2 to avoid fetching unchanged web resource again and again
+
+6. provide rss or atom feed
+
+7. 

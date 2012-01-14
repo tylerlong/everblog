@@ -9,13 +9,19 @@
 <body>
 <div class=container>
       <div class=header>
-        <a href="/about/">Tyler Long</a>'s Thoughts and Writings
+          <a href="{{ url_for('page.read', title = 'about') }}">Tyler Long</a>'s Thoughts and Writings
       </div>
       <div class=navigation>
         <ul>
-          <li><a href="/">blog</a>
-          <li><a href="/projects/">projects</a>
-          <li><a href="/about/">about</a>
+            <li><a href="{{ url_for('blog_entry.list') }}">blog</a></li>
+            <li><a href="{{ url_for('blog_entry.list_cn') }}">博客</a></li>
+            {% for page in g.pages %}
+            <li><a href="{{ url_for('page.read', title = page.title.lower()) }}">{{ page.title.lower() }}</a></li>
+            {% endfor %}
+            <li><a href="{{ url_for('admin.index') }}">admin</a></li>
+            {% if 'admin' in session %}
+            <li><a href="{{ url_for('admin.logout') }}">logout</a></li>
+            {% endif %}
         </ul>
       </div>
 <div class=body>
@@ -23,11 +29,14 @@
 </div>
 <div class=footer>
     <p>
-        Contact me via <a href="mailto:mituzhishi@gmail.com">mail</a>,
-        <a href="https://github.com/tylerlong">github</a> or
-        <a href="https://bitbucket.org/tylerlong">bitbucket</a>.
+    Contact me via
+    {% for contact in g.contacts[:-1] %}
+    <a href="{{ contact.1 }}" target="_blank">{{ contact.0 }}</a>, 
+    {% endfor %}
+    <a href="{{ g.contacts[-1].1 }}" target="_blank">{{ g.contacts[-1].0 }}</a>.
     </p>
-    <p>&copy; Copyright 2011 by Tyler Long, proudly powered by <a href="https://github.com/tylerlong/everblog">everblog</a></p>
+    <p>&copy; Copyright 2011 by Tyler Long, proudly powered by
+    <a href="https://github.com/tylerlong/everblog" target="_blank">everblog</a>.</p>
 </div>
 </div>
 </body>

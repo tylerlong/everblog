@@ -1,3 +1,7 @@
+========
+EverBlog
+========
+
 Introduction
 ************
 Everblog is named after Evernote, you can publish your Evernote notes to Everblog as blog entries.
@@ -21,7 +25,7 @@ I will write a tutorial, please stay tuned.
 
 Examples & Demos
 ****************
-I am going to setup a demo site at http://blog.tylerlong.me
+Please refer to my blog: http://tylerlong.me
 
 
 

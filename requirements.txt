@@ -1,2 +1,0 @@
-Flask>=0.8
-quick_orm>=0.2.5

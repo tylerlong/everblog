@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block title %}Blog{% endblock %}
+{% block body %}
+{% for blog_entry in items %}
+<div class=entry-overview>
+    <div class=date>{{ blog_entry.created }}</div>
+    <div class=detail>
+        <h1><a href="{{ url_for('blog_entry.read', id = blog_entry.id) }}">{{ blog_entry.title }}</a></h1>
+        <div class=summary><p>{{ blog_entry.snippet }} ...</p></div>
+    </div>
+</div>
+{% endfor %}
+{% endblock %}

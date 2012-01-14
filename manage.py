@@ -5,8 +5,7 @@
     Like Django's manage.py, but simpler. Provides useful commands to manage the project
 """
 import sys, subprocess
-from toolkit_library.inspector import ModuleInspector
-from everblog import db, fixtures
+from everblog import db
 
 
 def drop_tables():
@@ -34,22 +33,33 @@ def show_tables():
 
 def load_data():
     """Load data into database from fixtures.py"""
+    from everblog import fixtures
     db.load_data(fixtures)
     print 'Data loaded'
 
 
 def recreate_tables_then_load_data():
-    """recreate all tables and load the fixtures data"""
+    """Recreate all tables and load the fixtures data"""
     drop_tables()
     create_tables()
     load_data()
 
 
-def install_requirements():
+def install_requires():
     """Install required Python packages"""
-    subprocess.call(['pip', 'install', '-r', 'requirements.txt', ])
+    subprocess.call(['pip', 'install', '-r', 'requires.txt', ])
+
+
+def run_app():
+    """Run the web application"""
+    from everblog import app
+    if len(sys.argv) < 2:
+        subprocess.call([sys.executable, 'manage.py', 'run_app'])
+    else:
+        app.run(host = '0.0.0.0')
 
 
 if __name__ == '__main__':
+    from toolkit_library.inspector import ModuleInspector
     inspector = ModuleInspector(sys.modules[__name__])
     inspector.invoke(*sys.argv[1:])
