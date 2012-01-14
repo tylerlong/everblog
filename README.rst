@@ -19,13 +19,13 @@ Here comes Everblog!
 
 How to deploy ?
 ***************
-I will write a tutorial, please stay tuned.
+Please refer to my blog: http://tylerlong.me, there are tutorials.
 
 
 
 Examples & Demos
 ****************
-Please refer to my blog: http://tylerlong.me
+My blog: http://tylerlong.me
 
 
 
