@@ -8,4 +8,10 @@
 
 6. provide rss or atom feed
 
-7. 
+7. synchronize() no need to fetch two urls for one note. just the first one is enough.
+
+9. investigate sharing a folder in Evernote
+
+10. re-sync automatically
+
+11. 

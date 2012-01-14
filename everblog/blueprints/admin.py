@@ -7,7 +7,7 @@
 from flask import Blueprint, request, render_template, abort, session, redirect, url_for
 from everblog import app, db
 from everblog.blueprints import admin_required
-from everblog.models import BlogEntry
+from everblog.models import Article, BlogEntry
 
 
 blueprint = Blueprint('admin', __name__)
@@ -38,3 +38,13 @@ def index():
     """Administration home page"""
     blog_entries = db.session.query(BlogEntry)
     return render_template('admin/index.html', blog_entries = blog_entries)
+
+
+@blueprint.route('/sync/', methods = ['GET', ])
+def synchronize():
+    """synchronize contents with Evernote"""
+    articles = db.session.query(Article)
+    for article in articles:
+        article.synchronize()
+    db.session.commit()
+    return 'success'

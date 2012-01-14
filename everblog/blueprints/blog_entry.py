@@ -4,7 +4,6 @@
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Notes from evernote, Which will be converted to blog entries.
 """
-import urllib2
 from flask import Blueprint, render_template, abort, redirect, url_for, request
 from everblog import db
 from everblog.models import BlogEntry

@@ -29,17 +29,12 @@ class Article(object):
     content = Column(Text, nullable = False)
 
     def synchronize(self):
-        socket = urllib2.urlopen(self.evernote_url)
-        data = socket.read().decode('utf-8')
-        socket.close()
-        match = evernote_title_pattern.search(data)
-        self.title = match.group(1)        
+        data = urllib2.urlopen(self.evernote_url).read().decode('UTF-8')
+        self.title = evernote_title_pattern.search(data).group(1)
 
-        dct = evernote_url_pattern.search(self.evernote_url).groupdict()
-        url = 'https://www.evernote.com/shard/{0}/sh/{1}/{2}/note/{1}'.format(dct['shard_id'], dct['guid'], dct['key'])
-        socket = urllib2.urlopen(url)
-        self.content = socket.read().decode('utf-8')
-        socket.close()
+        dict_ = evernote_url_pattern.search(self.evernote_url).groupdict()
+        url = 'https://www.evernote.com/shard/{0}/sh/{1}/{2}/note/{1}'.format(dict_['shard_id'], dict_['guid'], dict_['key'])
+        self.content = urllib2.urlopen(url).read().decode('UTF-8')
 
 
 class BlogEntry(Article):
