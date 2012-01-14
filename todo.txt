@@ -2,16 +2,16 @@
 
 2. make it online!
 
-4. cron job to synchronize blog entries automatically.
-
 5. httplib2 to avoid fetching unchanged web resource again and again
 
 6. provide rss or atom feed
 
-7. synchronize() no need to fetch two urls for one note. just the first one is enough.
-
 9. investigate sharing a folder in Evernote
 
-10. re-sync automatically
+10. sync automatically (crontab or cron by python?)
 
-11. 
+11. support tags
+
+12. time and timezone, re-think
+
+13. 
