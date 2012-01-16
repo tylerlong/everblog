@@ -14,17 +14,16 @@ evernote_data_pattern = re.compile('(?<=Evernote\.WebClient\.Note = )\{.+?\}(?=;
 chinese_character_pattern = re.compile(u'[\u4e00-\u9fa5]')
 
 
-class DefaultModel(object):
+class DefaultModel:
     created = Column(DateTime, nullable = False)
     updated = Column(DateTime, nullable = False)
     published = Column(DateTime, default = func.now())
     
-metaclass = Database.MetaBuilder(DefaultModel)
+__metaclass__ = Database.MetaBuilder(DefaultModel)
 
 
-class Article(object):
+class Article:
     """Represents an article"""
-    __metaclass__ = metaclass
     evernote_url = Column(String(128), nullable = False, unique = True)
     title = Column(String(128), nullable = False)
     content = Column(Text, nullable = False)

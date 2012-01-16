@@ -17,6 +17,13 @@ Here comes Everblog!
 
 
 
+Features
+********
+ - simple to setup and simple to use
+ - support many databases as backends, such as mysql, sqlite, postgresql... etc.
+
+
+
 How to deploy ?
 ***************
 Please refer to my blog: http://tylerlong.me, there are tutorials.
