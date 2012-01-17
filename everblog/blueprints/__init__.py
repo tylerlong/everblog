@@ -26,6 +26,7 @@ def before_request():
     """called before every request"""
     g.pages = db.session.query(Page).order_by(Page.order)
     g.contacts = app.config['CONTACT_METHODS']
+    g.blog_owner = app.config['BLOG_OWNER']
 
 def teardown_request(exception = None):
     """called after every request"""

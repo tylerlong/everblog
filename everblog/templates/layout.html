@@ -2,14 +2,14 @@
 <html>
   <head>
     <meta charset="utf-8"/>  
-    <title>{% block title %}{% endblock %} | Tyler Long's Thoughts and Writings</title>
+    <title>{% block title %}{% endblock %} | {{ g.blog_owner }}'s Thoughts and Writings</title>
     <link href="http://fonts.googleapis.com/css?family=Vollkorn&subset=latin" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="{{ url_for('static', filename = 'main.css') }}" type="text/css">
   </head>
 <body>
 <div class=container>
       <div class=header>
-          <a href="{{ url_for('page.read', title = 'about') }}">Tyler Long</a>'s Thoughts and Writings
+          <a href="{{ url_for('page.read', title = 'about') }}">{{ g.blog_owner }}</a>'s Thoughts and Writings
       </div>
       <div class=navigation>
         <ul>

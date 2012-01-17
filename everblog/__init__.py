@@ -27,6 +27,8 @@ app.config.update(
     ADMIN_USERNAME = 'admin',
     ADMIN_PASSWORD = 'password',
 
+    BLOG_OWNER = 'Tyler Long',
+
     CONTACT_METHODS = [
         ('email', 'mailto:mituzhishi@gmail.com'),
         (u'微博', 'http://weibo.com/tylerlong'),
