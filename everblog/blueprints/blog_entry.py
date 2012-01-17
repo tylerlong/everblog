@@ -9,20 +9,31 @@ from everblog import db
 from everblog.models import BlogEntry
 from everblog.blueprints import admin_required
 
+DEFAULT_LANG = 'en'
+PAGE_SIZE = 10
 
 blueprint = Blueprint('blog_entry', __name__)
 
+@blueprint.route('/<regex("[a-z]{2}"):lang>/page/<int:page>/', methods = ['GET', ])
+def list_lang_page(lang, page):
+    if not lang in ('en', 'cn',) or page < 1:
+        abort(404)
+    blog_entries = db.session.query(BlogEntry).filter_by(lang = lang)
+    hasNext = True if blog_entries.count() > page * PAGE_SIZE else False
+    items = blog_entries.order_by(BlogEntry.created.desc()).slice(page * PAGE_SIZE - PAGE_SIZE, page * PAGE_SIZE)
+    if items.count() < 1:
+        abort(404)
+    return render_template('blog_entry/list.html', lang = lang, page = page, items = items, hasNext = hasNext)
 
+@blueprint.route('/<regex("[a-z]{2}"):lang>/', methods = ['GET', ])
+def list_lang(lang):
+    return list_lang_page(lang, 1)
+@blueprint.route('/page/<int:page>/', methods = ['GET', ])
+def list_page(page):
+    return list_lang_page(DEFAULT_LANG, page)
 @blueprint.route('/', methods = ['GET', ])
 def list():
-    blog_entries = db.session.query(BlogEntry).filter_by(lang = 'en').order_by(BlogEntry.created.desc())
-    return render_template('blog_entry/list.html', items = blog_entries)
-
-
-@blueprint.route('/cn/', methods = ['GET', ])
-def list_cn():
-    blog_entries = db.session.query(BlogEntry).filter_by(lang = 'cn').order_by(BlogEntry.created.desc())
-    return render_template('blog_entry/list.html', items = blog_entries)
+    return list_lang(DEFAULT_LANG)
 
 
 @blueprint.route('/<int:id>/', methods = ['GET', ])

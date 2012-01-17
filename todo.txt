@@ -16,4 +16,6 @@
 
 14. support http cache to speedup
 
-15. 
+15. check duplicate evernote_url (catch the exception)
+
+16. 

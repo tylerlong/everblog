@@ -2,6 +2,7 @@
 
 {% block title %}Blog{% endblock %}
 {% block body %}
+
 {% for blog_entry in items %}
 <div class=entry-overview>
     <div class=date>{{ blog_entry.created }}</div>
@@ -11,4 +12,23 @@
     </div>
 </div>
 {% endfor %}
+
+<div class="pagination">
+{% if page == 1 %}<span class="disabled">« Previous</span>
+{% else %}
+<a href="{% if lang == 'en' %}
+    {% if page == 2 %}{{ url_for('blog_entry.list') }}{% else %}{{ url_for('blog_entry.list_page', page = page - 1) }}{% endif %}
+    {% else %}
+    {% if page == 2 %}{{ url_for('blog_entry.list_lang', lang = lang) }}{% else %}{{ url_for('blog_entry.list_lang_page', lang = lang, page = page - 1) }}{% endif %}
+    {% endif %}">« Previous</a>
+{% endif %}
+ — 
+ <strong>{{ page }}</strong>
+ — 
+{% if not hasNext %}<span class="disabled">Next »</span>
+{%else%}
+<a href="{% if lang == 'en' %}{{ url_for('blog_entry.list_page', page = page + 1) }}{% else %}{{ url_for('blog_entry.list_lang_page', lang = lang, page = page + 1) }}{% endif %}">Next »</a>
+{% endif %}
+</div>
+
 {% endblock %}
