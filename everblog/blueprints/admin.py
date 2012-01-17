@@ -47,4 +47,4 @@ def synchronize():
     for article in articles:
         article.synchronize()
     db.session.commit()
-    return 'Synchronization finished successfully. You may close this page.'
+    return 'Synchronization finished successfully. <a href="javascript:self.close()" >Close</a> this window.'

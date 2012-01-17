@@ -6,13 +6,9 @@
 
 9. investigate sharing a folder in Evernote
 
-10. sync automatically (crontab or cron by python?)
-
 11. support tags
 
 12. time and timezone, re-think
-
-13. support pagination
 
 14. support http cache to speedup
 

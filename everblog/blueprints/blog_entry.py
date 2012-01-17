@@ -10,7 +10,7 @@ from everblog.models import BlogEntry
 from everblog.blueprints import admin_required
 
 DEFAULT_LANG = 'en'
-PAGE_SIZE = 10
+PAGE_SIZE = 8
 
 blueprint = Blueprint('blog_entry', __name__)
 
