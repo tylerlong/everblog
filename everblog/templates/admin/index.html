@@ -44,7 +44,10 @@
 
 <br/>
 <br/>
-<h2>Configuration</h2>
-some configuration items here
+<h2>Synchronization</h2>
+<ul>
+    <li><a href="{{ url_for('admin.synchronize') }}" target="_blank">synchronize all</a> contents with Evernote</li>
+    <li>Create a cron job to synchronize automatically: curl {{ url_for('admin.synchronize') }}</li>
+</ul>
 
 {% endblock %}

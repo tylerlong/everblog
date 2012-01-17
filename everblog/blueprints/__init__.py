@@ -36,9 +36,9 @@ all_blueprints = packageInspector.get_all_modules()
 for blueprint in all_blueprints:
     #import blueprint
     exec('from everblog.blueprints import {0}'.format(blueprint))
-    #注册before_request到各个blueprint
+    #register before_request to every blueprint
     exec('{0}.blueprint.before_request(before_request)'.format(blueprint))
-    #注册teardown_request到各个blueprint
+    #register teardown_request to every blueprint
     exec('{0}.blueprint.teardown_request(teardown_request)'.format(blueprint))
     #register blueprint to app
     exec('app.register_blueprint({0}.blueprint)'.format(blueprint)) 
