@@ -10,6 +10,7 @@ from everblog.models import Page
 from everblog.blueprints import admin_required
 from wsgiref.handlers import format_date_time
 from time import mktime
+import hashlib
 
 
 blueprint = Blueprint('page', __name__)
@@ -22,6 +23,7 @@ def read(title):
         abort(404)
     response = make_response(render_template('page/read.html', page = page))
     response.headers['Last-Modified'] = format_date_time(mktime(page.updated.timetuple()))
+    response.headers['ETag'] = '"{0}"'.format(hashlib.sha256(str(page.updated)).hexdigest())
     return response
 
 
