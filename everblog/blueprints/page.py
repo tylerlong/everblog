@@ -21,9 +21,15 @@ def read(title):
     page = db.session.query(Page).filter_by(title = title.capitalize()).first()
     if not page:
         abort(404)
+    etag = '"{0}"'.format(hashlib.sha256(str(page.updated)).hexdigest())
+    if 'If-None-Match' in request.headers and requeset.headers['If-None-Match'] == etag:
+        return '', 304
+    last_modified = format_date_time(mktime(page.updated.timetuple()))
+    if 'If-Modified-Since' in request.headers and request.headers['If-Modified-Since'] == last_modified:
+        return '', 304    
     response = make_response(render_template('page/read.html', page = page))
-    response.headers['Last-Modified'] = format_date_time(mktime(page.updated.timetuple()))
-    response.headers['ETag'] = '"{0}"'.format(hashlib.sha256(str(page.updated)).hexdigest())
+    response.headers['ETag'] = etag
+    response.headers['Last-Modified'] = last_modified
     return response
 
 

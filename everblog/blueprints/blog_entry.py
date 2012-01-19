@@ -4,10 +4,13 @@
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Notes from evernote, Which will be converted to blog entries.
 """
-from flask import Blueprint, render_template, abort, redirect, url_for, request
+from flask import Blueprint, render_template, abort, redirect, url_for, request, make_response
 from everblog import db
 from everblog.models import BlogEntry
 from everblog.blueprints import admin_required
+from wsgiref.handlers import format_date_time
+from time import mktime
+import hashlib
 
 DEFAULT_LANG = 'en'
 PAGE_SIZE = 8
@@ -41,7 +44,16 @@ def read(id):
     blog_entry = db.session.query(BlogEntry).get(id)
     if not blog_entry:
         abort(404)
-    return render_template('blog_entry/read.html', blog_entry = blog_entry)
+    etag = '"{0}"'.format(hashlib.sha256(str(blog_entry.updated)).hexdigest())
+    if 'If-None-Match' in request.headers and requeset.headers['If-None-Match'] == etag:
+        return '', 304
+    last_modified = format_date_time(mktime(blog_entry.updated.timetuple()))
+    if 'If-Modified-Since' in request.headers and request.headers['If-Modified-Since'] == last_modified:
+        return '', 304    
+    response = make_response(render_template('blog_entry/read.html', blog_entry = blog_entry))
+    response.headers['ETag'] = etag
+    response.headers['Last-Modified'] = last_modified
+    return response
 
 
 @blueprint.route('/create/', methods = ['POST', ])
