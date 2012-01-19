@@ -4,10 +4,12 @@
     ~~~~~~~~~~~~~~~~~~~~~~~~~~
     Static pages for the site
 """
-from flask import Blueprint, render_template, abort, redirect, request, url_for
+from flask import Blueprint, render_template, abort, redirect, request, url_for, make_response
 from everblog import db
 from everblog.models import Page
 from everblog.blueprints import admin_required
+from wsgiref.handlers import format_date_time
+from time import mktime
 
 
 blueprint = Blueprint('page', __name__)
@@ -18,7 +20,9 @@ def read(title):
     page = db.session.query(Page).filter_by(title = title.capitalize()).first()
     if not page:
         abort(404)
-    return render_template('page/read.html', page = page)
+    response = make_response(render_template('page/read.html', page = page))
+    response.headers['Last-Modified'] = format_date_time(mktime(page.updated.timetuple()))
+    return response
 
 
 @blueprint.route('/p/create/', methods = ['POST', ])
