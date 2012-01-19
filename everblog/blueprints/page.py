@@ -22,10 +22,10 @@ def read(title):
     if not page:
         abort(404)
     etag = '"{0}"'.format(hashlib.sha256(str(page.updated)).hexdigest())
-    if 'If-None-Match' in request.headers and request.headers['If-None-Match'] == etag:
+    if request.headers.get('If-None-Match', '') == etag:
         return '', 304
     last_modified = format_date_time(mktime(page.updated.timetuple()))
-    if 'If-Modified-Since' in request.headers and request.headers['If-Modified-Since'] == last_modified:
+    if request.headers.get('If-Modified-Since', '') == last_modified:
         return '', 304    
     response = make_response(render_template('page/read.html', page = page))
     response.headers['ETag'] = etag
