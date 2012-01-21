@@ -2,11 +2,9 @@
 
 9. investigate sharing a folder in Evernote
 
-11. support tags
+11. support tags, I think it's important, I can group the blog entries and show a group to others
 
 12. time and timezone, re-think
-
-15. check duplicate evernote_url (catch the exception)
 
 16. pagination for admin pages
 

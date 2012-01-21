@@ -5,6 +5,7 @@
     Static pages for the site
 """
 from flask import Blueprint, render_template, abort, redirect, request, url_for, make_response
+from sqlalchemy import func
 from everblog import db
 from everblog.models import Page
 from everblog.blueprints import admin_required
@@ -16,10 +17,10 @@ import hashlib
 blueprint = Blueprint('page', __name__)
 
 
-@blueprint.route('/<regex("(?:[a-z]{3,16}|[\u4e00-\u9fa5]{2,8})"):title>/', methods = ['GET', ])
+@blueprint.route('/<regex("(?:[a-z0-9]{3,16}|[\u4e00-\u9fa5]{2,8})"):title>/', methods = ['GET', ])
 def read(title):
     """show a page"""
-    page = db.session.query(Page).filter_by(title = title.capitalize()).first()
+    page = db.session.query(Page).filter(func.lower(Page.title) == title.lower()).first()
     if not page:
         abort(404)
     etag = '"{0}"'.format(hashlib.sha256(str(page.updated)).hexdigest())
@@ -39,7 +40,9 @@ def read(title):
 @admin_required
 def create():
     """create a page"""
-    page = Page(evernote_url = request.form['evernote_url'], order = request.form['order'])
-    page.synchronize()
-    db.session.add_then_commit(page)
+    page = db.session.query(Page).filter_by(evernote_url = request.form['evernote_url']).first()
+    if not page:
+        page = Page(evernote_url = request.form['evernote_url'], order = request.form['order'])
+        page.synchronize()
+        db.session.add_then_commit(page)
     return redirect(url_for('admin.index'))

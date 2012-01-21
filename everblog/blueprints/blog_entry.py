@@ -70,9 +70,11 @@ def read(id):
 @admin_required
 def create():
     """create a blog entry"""
-    blog_entry = BlogEntry(evernote_url = request.form['evernote_url'])
-    blog_entry.synchronize()
-    db.session.add_then_commit(blog_entry)
+    blog_entry = db.session.query(BlogEntry).filter_by(evernote_url = request.form['evernote_url']).first()
+    if not blog_entry:
+        blog_entry = BlogEntry(evernote_url = request.form['evernote_url'])
+        blog_entry.synchronize()
+        db.session.add_then_commit(blog_entry)
     return redirect(url_for('admin.index'))
 
 
