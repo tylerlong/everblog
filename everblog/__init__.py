@@ -4,6 +4,10 @@
     ~~~~~~~~
     Everblog is named after Evernote, you can publish your Evernote notes to Everblog as blog entries.
 """
+__author__ = 'Tyler Long'
+__version__ = '0.1.1'
+
+
 from flask import Flask
 from werkzeug.routing import BaseConverter
 from quick_orm.core import Database

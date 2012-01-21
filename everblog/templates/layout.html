@@ -5,6 +5,8 @@
     <title>{% block title %}{% endblock %} | {{ g.blog_owner }}'s Thoughts and Writings</title>
     <link href="http://fonts.googleapis.com/css?family=Vollkorn&subset=latin" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="{{ url_for('static', filename = 'main.css') }}" type="text/css">
+    <link href="{{ url_for('blog_entry.feed') }}" rel="alternate" title="Recent Blog Entries" type="application/atom+xml"> 
+    <link href="{{ url_for('blog_entry.lang_feed', lang = 'cn') }}" rel="alternate" title="最新博客文章" type="application/atom+xml"> 
   </head>
 <body>
 <div class=container>
@@ -36,7 +38,10 @@
     <a href="{{ g.contacts[-1].1 }}" target="_blank">{{ g.contacts[-1].0 }}</a>.
     </p>
     <p>&copy; Copyright 2012 by {{ g.blog_owner }}, proudly powered by
-    <a href="https://github.com/tylerlong/everblog" target="_blank">everblog</a>.</p>
+    <a href="https://github.com/tylerlong/everblog" target="_blank">everblog</a>.
+    (<a href="{{ url_for('blog_entry.feed') }}" rel="alternate" title="Recent Blog Entries">feed</a>,
+    <a href="{{ url_for('blog_entry.lang_feed', lang = 'cn') }}" rel="alternate" title="最新博客文章">订阅</a>)
+    </p>
 </div>
 </div>
 </body>

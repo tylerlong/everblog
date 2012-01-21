@@ -27,6 +27,7 @@ def read(title):
     last_modified = format_date_time(mktime(page.updated.timetuple()))
     if request.headers.get('If-Modified-Since', '') == last_modified:
         return '', 304    
+
     response = make_response(render_template('page/read.html', page = page))
     response.headers['ETag'] = etag
     response.headers['Last-Modified'] = last_modified
