@@ -15,11 +15,10 @@ blueprint = Blueprint('admin', __name__)
 
 @blueprint.route('/login/', methods = ['GET', 'POST', ])
 def login():
+    """login"""
     if request.method == 'GET':
         return render_template('admin/login.html')
-    username = request.form['username']
-    password = request.form['password']
-    if username == app.config['ADMIN_USERNAME'] and password == app.config['ADMIN_PASSWORD']:
+    if request.form['username'] == app.config['ADMIN_USERNAME'] and request.form['password'] == app.config['ADMIN_PASSWORD']:
         session['admin'] = True
         return redirect(url_for('admin.index'))
     return render_template('admin/login.html')
@@ -35,16 +34,6 @@ def logout():
 @blueprint.route('/admin/', methods = ['GET', ])
 @admin_required
 def index():
-    """Administration home page"""
-    blog_entries = db.session.query(BlogEntry)
+    """administration home page"""
+    blog_entries = db.session.query(BlogEntry).order_by(BlogEntry.created.desc())
     return render_template('admin/index.html', blog_entries = blog_entries)
-
-
-@blueprint.route('/sync/', methods = ['GET', ])
-def synchronize():
-    """synchronize contents with Evernote"""
-    articles = db.session.query(Article)
-    for article in articles:
-        article.synchronize()
-    db.session.commit()
-    return 'Synchronization finished successfully. <a href="javascript:self.close()" >Close</a> this window.'

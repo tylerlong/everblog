@@ -41,24 +41,3 @@ def create():
     page.synchronize()
     db.session.add_then_commit(page)
     return redirect(url_for('admin.index'))
-
-
-@blueprint.route('/p/delete/<int:id>/', methods = ['GET', ])
-@admin_required
-def delete(id):
-    page = db.session.query(Page).get(id)
-    if not page:
-        abort(404)
-    db.session.delete_then_commit(page)
-    return redirect(url_for('admin.index'))
-
-
-@blueprint.route('/p/synchronize/<int:id>/', methods = ['GET', ])
-@admin_required
-def synchronize(id):
-    page = db.session.query(Page).get(id)
-    if not page:
-        abort(404)
-    page.synchronize()
-    db.session.commit()
-    return redirect(url_for('admin.index'))

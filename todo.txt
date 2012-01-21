@@ -1,17 +1,13 @@
 1. make the html pages fully html5. (header, footer, article, aside ...etc)
 
-5. httplib2 to avoid fetching unchanged web resource again and again
-
-6. provide rss or atom feed
-
 9. investigate sharing a folder in Evernote
 
 11. support tags
 
 12. time and timezone, re-think
 
-14. support http cache to speedup
-
 15. check duplicate evernote_url (catch the exception)
 
-16. 
+16. pagination for admin pages
+
+17. 

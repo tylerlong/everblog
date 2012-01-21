@@ -21,6 +21,7 @@ blueprint = Blueprint('blog_entry', __name__)
 
 @blueprint.route('/<regex("[a-z]{2}"):lang>/page/<int:page>/', methods = ['GET', ])
 def list_lang_page(lang, page):
+    """blog entry list, filtered by language and page number"""
     if not lang in ('en', 'cn',) or page < 1:
         abort(404)
     blog_entries = db.session.query(BlogEntry).filter_by(lang = lang)
@@ -32,17 +33,23 @@ def list_lang_page(lang, page):
 
 @blueprint.route('/<regex("[a-z]{2}"):lang>/', methods = ['GET', ])
 def list_lang(lang):
+    """blog entry list, filtered by language, show the first page"""
     return list_lang_page(lang, 1)
+
 @blueprint.route('/page/<int:page>/', methods = ['GET', ])
 def list_page(page):
+    """blog entry list, filtered by page number, show entries in the default language"""
     return list_lang_page(DEFAULT_LANG, page)
+
 @blueprint.route('/', methods = ['GET', ])
 def list():
+    """blog entry list, show the first page of entries in the default language"""
     return list_lang(DEFAULT_LANG)
 
 
 @blueprint.route('/<int:id>/', methods = ['GET', ])
 def read(id):
+    """show a blog entry"""
     blog_entry = db.session.query(BlogEntry).get(id)
     if not blog_entry:
         abort(404)
@@ -62,37 +69,18 @@ def read(id):
 @blueprint.route('/create/', methods = ['POST', ])
 @admin_required
 def create():
+    """create a blog entry"""
     blog_entry = BlogEntry(evernote_url = request.form['evernote_url'])
     blog_entry.synchronize()
     db.session.add_then_commit(blog_entry)
     return redirect(url_for('admin.index'))
 
 
-@blueprint.route('/delete/<int:id>/', methods = ['GET', ])
-@admin_required
-def delete(id):
-    blog_entry = db.session.query(BlogEntry).get(id)
-    if not blog_entry:
-        abort(404)
-    db.session.delete_then_commit(blog_entry)
-    return redirect(url_for('admin.index'))
-
-
-@blueprint.route('/synchronize/<int:id>/', methods = ['GET', ])
-@admin_required
-def synchronize(id):
-    blog_entry = db.session.query(BlogEntry).get(id)
-    if not blog_entry:
-        abort(404)
-    blog_entry.synchronize()
-    db.session.commit()
-    return redirect(url_for('admin.index'))
-
-
 @blueprint.route('/<regex("[a-z]{2}"):lang>/feed.atom', methods = ['GET', ])
 def lang_feed(lang):
+    """generate atom feed, filtered by language"""
     blog_entries = db.session.query(BlogEntry).filter_by(lang = lang)
-    updated = blog_entries.order_by(BlogEntry.published.desc()).first().published if blog_entries.count() > 0 else None
+    updated = blog_entries.order_by(BlogEntry.published.desc()).first().published if blog_entries.count() > 0 else ''
 
     etag = '"{0}"'.format(hashlib.sha256(str(updated)).hexdigest())
     if request.headers.get('If-None-Match', '') == etag:
@@ -100,6 +88,7 @@ def lang_feed(lang):
     last_modified = format_date_time(mktime(updated.timetuple()))
     if request.headers.get('If-Modified-Since', '') == last_modified:
         return '', 304
+
     title = app.config['BLOG_OWNER'] + "'s Thoughts and Writings"
     if lang == 'cn':
         title = app.config['BLOG_OWNER'] + u'的博客'
