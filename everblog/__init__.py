@@ -38,6 +38,7 @@ app.config.update(
         (u'微博', 'http://weibo.com/tylerlong'),
         ('github', 'https://github.com/tylerlong'),
         ('bitbucket', 'https://bitbucket.org/tylerlong'),
+        ('stackoverflow', 'http://stackoverflow.com/users/862862/tyler-long'),
     ]
 )
 

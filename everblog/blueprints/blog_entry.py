@@ -100,8 +100,10 @@ def lang_feed(lang):
     last_modified = format_date_time(mktime(updated.timetuple()))
     if request.headers.get('If-Modified-Since', '') == last_modified:
         return '', 304
-
-    feed = AtomFeed(title = 'Recent Articles', 
+    title = app.config['BLOG_OWNER'] + "'s Thoughts and Writings"
+    if lang == 'cn':
+        title = app.config['BLOG_OWNER'] + u'的博客'
+    feed = AtomFeed(title = title, 
                     url = request.url_root, 
                     feed_url = request.url, 
                     author = app.config['BLOG_OWNER'])
