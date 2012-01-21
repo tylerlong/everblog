@@ -18,6 +18,7 @@ blueprint = Blueprint('page', __name__)
 
 @blueprint.route('/<regex("(?:[a-z]{3,16}|[\u4e00-\u9fa5]{2,8})"):title>/', methods = ['GET', ])
 def read(title):
+    """show a page"""
     page = db.session.query(Page).filter_by(title = title.capitalize()).first()
     if not page:
         abort(404)
@@ -37,6 +38,7 @@ def read(title):
 @blueprint.route('/p/create/', methods = ['POST', ])
 @admin_required
 def create():
+    """create a page"""
     page = Page(evernote_url = request.form['evernote_url'], order = request.form['order'])
     page.synchronize()
     db.session.add_then_commit(page)

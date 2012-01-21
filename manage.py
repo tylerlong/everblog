@@ -8,6 +8,11 @@ import sys, subprocess
 from everblog import db
 
 
+def show_tables():
+    """Show all of the tables in database"""
+    print db.engine.table_names()
+
+
 def drop_tables():
     """Drop all tables in database"""
     db.drop_tables()
@@ -26,11 +31,6 @@ def recreate_tables():
     create_tables()
 
 
-def show_tables():
-    """Show all of the tables in database"""
-    print db.engine.table_names()
-
-
 def load_data():
     """Load data into database from fixtures.py"""
     from everblog import fixtures
@@ -43,11 +43,6 @@ def recreate_tables_then_load_data():
     drop_tables()
     create_tables()
     load_data()
-
-
-def install_requires():
-    """Install required Python packages"""
-    subprocess.call(['pip', 'install', '-r', 'requires.txt', ])
 
 
 def run_app():

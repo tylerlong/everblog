@@ -14,8 +14,8 @@ from everblog import app, db
 from everblog.models import BlogEntry
 from everblog.blueprints import admin_required
 
-DEFAULT_LANG = 'en'
-PAGE_SIZE = 8
+DEFAULT_LANG = app.config['DEFAULT_LANG']
+PAGE_SIZE = app.config['PAGE_SIZE']
 
 blueprint = Blueprint('blog_entry', __name__)
 
@@ -78,9 +78,9 @@ def create():
 
 @blueprint.route('/<regex("[a-z]{2}"):lang>/feed.atom', methods = ['GET', ])
 def lang_feed(lang):
-    """generate atom feed, filtered by language"""
-    blog_entries = db.session.query(BlogEntry).filter_by(lang = lang)
-    updated = blog_entries.order_by(BlogEntry.published.desc()).first().published if blog_entries.count() > 0 else ''
+    """generate atom feed for blog entries in the specific language"""
+    blog_entries = db.session.query(BlogEntry).filter_by(lang = lang).order_by(BlogEntry.created.desc()).limit(PAGE_SIZE)
+    updated = blog_entries.first().created if blog_entries.count() > 0 else ''
 
     etag = '"{0}"'.format(hashlib.sha256(str(updated)).hexdigest())
     if request.headers.get('If-None-Match', '') == etag:
@@ -98,7 +98,6 @@ def lang_feed(lang):
                     author = app.config['BLOG_OWNER'])
     if updated:
         feed.updated = updated
-    blog_entries = blog_entries.order_by(BlogEntry.created.desc()).limit(PAGE_SIZE)
     for blog_entry in blog_entries:
         feed.add(title = blog_entry.title, 
                  content = unicode(blog_entry.content),
@@ -106,9 +105,7 @@ def lang_feed(lang):
                  author = app.config['BLOG_OWNER'],
                  url = urljoin(request.url_root, url_for('blog_entry.read', id = blog_entry.id)),
                  updated = blog_entry.updated,
-                 published = blog_entry.published,
-                 summary = blog_entry.snippet,
-                 summary_type = 'text')
+                 published = blog_entry.created)
     
     response = feed.get_response()
     response.headers['ETag'] = etag
@@ -118,4 +115,5 @@ def lang_feed(lang):
 
 @blueprint.route('/feed.atom', methods = ['GET', ])
 def feed():
-    return lang_feed('en')
+    """generate atom feed for blog entries in the default language"""
+    return lang_feed(DEFAULT_LANG)
