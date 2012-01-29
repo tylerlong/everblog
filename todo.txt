@@ -6,4 +6,8 @@
 
 16. pagination for admin pages
 
-17. 
+17. add comments support - global messages? global commments?
+
+18. support full-text searching - index bucket?
+
+19. 

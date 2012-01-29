@@ -2,7 +2,7 @@
 """
     wendaren.models
     ~~~~~~~~~~~~~~~
-    Sqlalchemy database models
+    quick_orm database models
 """
 import re, urllib2, json, datetime
 from quick_orm.core import Database
@@ -52,6 +52,12 @@ class BlogEntry(Article):
 class Page(Article):
     "Represents a page in the website, such as the about page"
     order = Column(Integer)
+
+
+@Database.many_to_many(Article)
+class Tag:
+    """represents a tag in Evernote"""
+    name = Column(String(64), nullable = False, unique = True)
 
 
 Database.register()

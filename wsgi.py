@@ -1,7 +1,7 @@
 # coding=utf-8
 """
-    everblog.wsgi
-    ~~~~~~~~~~~~~
+    wsgi
+    ~~~~
     To be invoked by a web server which supports wsgi
 """
 VIRTUALENV_PATH = '/srv/envs/prod/'
