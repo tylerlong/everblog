@@ -8,6 +8,7 @@ import re, urllib2, json, datetime
 from quick_orm.core import Database
 from sqlalchemy import Column, String, Text, DateTime, func, Integer, Enum
 from toolkit_library.text_converter import TextConverter
+from everblog import db
 
 
 evernote_data_pattern = re.compile('(?<=Evernote\.WebClient\.Note = )\{.+?\}(?=;\s+?</script>)')
@@ -21,7 +22,7 @@ class Article:
     """Represents an article"""
     created = Column(DateTime, nullable = False)
     updated = Column(DateTime, nullable = False)
-    published = Column(DateTime, default = func.now())
+    published = Column(DateTime, nullable = False, default = func.now())
     evernote_url = Column(String(128), nullable = False, unique = True)
     title = Column(String(128), nullable = False)
     content = Column(Text, nullable = False)
@@ -34,12 +35,18 @@ class Article:
         self.content = dict_['content']
         self.created = datetime.datetime.fromtimestamp(dict_['created']/1000)
         self.updated = datetime.datetime.fromtimestamp(dict_['updated']/1000)
+        self.tags = []
+        if 'tagNames' in dict_:
+            for tagName in dict_['tagNames']:
+                tag = db.session.query(Tag).filter_by(name = tagName).first()
+                tag = tag if tag else Tag(name = tagName)
+                self.tags.append(tag)
 
 
 class BlogEntry(Article):
     """Represents a note in evernote or a blog entry in everblog."""    
-    snippet = Column(String(128))
-    lang = Column(Enum('en', 'cn'), default = 'en')
+    snippet = Column(String(128), nullable = False)
+    lang = Column(Enum('en', 'cn'), nullable = False, default = 'en')
 
     def synchronize(self):
         super(BlogEntry, self).synchronize()
@@ -51,7 +58,7 @@ class BlogEntry(Article):
 
 class Page(Article):
     "Represents a page in the website, such as the about page"
-    order = Column(Integer)
+    order = Column(Integer, nullable = False, default = 1)
 
 
 @Database.many_to_many(Article)

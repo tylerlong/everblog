@@ -6,7 +6,7 @@
 """
 from flask import abort, redirect, url_for, Blueprint
 from everblog import db
-from everblog.models import Article
+from everblog.models import Article, Tag
 from everblog.blueprints import admin_required
 
 
@@ -29,6 +29,10 @@ def synchronize_all():
     """synchronize all of the articles with Evernote"""
     for article in db.session.query(Article):
         article.synchronize()
+    db.session.commit()
+    for tag in db.session.query(Tag):
+        if tag.articles.count() <= 0:
+            db.session.delete_then_commit(tag)
     db.session.commit()
     return 'Synchronization finished successfully. <a href="javascript:self.close()" >Close</a> this window.'
 
