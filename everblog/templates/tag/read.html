@@ -4,5 +4,12 @@
 
 {% block body %}
 <h1 class="title">Entries tagged "{{ tag.name }}"</h1>
-entries list here
+<ul>
+{% for blog_entry in tag.blog_entrys.order_by('created desc') %}
+<li>
+<a href="{{ url_for('blog_entry.read', id = blog_entry.id) }}">{{ blog_entry.title }}</a>,
+written on {{ blog_entry.created }}
+</li>
+{% endfor %}
+</ul>
 {% endblock %}
