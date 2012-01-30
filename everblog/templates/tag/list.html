@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+
+{% block title %}Tags{% endblock %}
+
+{% block body %}
+<h1>Tags</h1>
+<ul class="tagcloud">
+    {% for tag in tags %}
+    <li><a href="{{ url_for('tag.read', name = tag.name) }}" style="font-size: 100%">{{ tag.name }}</a></li>
+    {% endfor %}
+</ul>
+{% endblock %}

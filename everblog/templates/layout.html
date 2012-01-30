@@ -17,6 +17,7 @@
         <ul>
             <li><a href="{{ url_for('blog_entry.list') }}">blog</a></li>
             <li><a href="{{ url_for('blog_entry.list_lang', lang = 'cn') }}">博客</a></li>
+            <li><a href="{{ url_for('tag.list') }}">tags</a></li>
             {% for page in g.pages %}
             <li><a href="{{ url_for('page.read', title = page.title.lower()) }}">{{ page.title.lower() }}</a></li>
             {% endfor %}

@@ -3,7 +3,7 @@
 {% block title %}Entries tagged "{{ tag.name }}"{% endblock %}
 
 {% block body %}
-<h1 class="title">Entries tagged "{{ tag.name }}"</h1>
+<h1>Entries tagged "{{ tag.name }}"</h1>
 <ul>
 {% for blog_entry in tag.blog_entrys.order_by('created desc') %}
 <li>

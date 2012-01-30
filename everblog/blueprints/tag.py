@@ -19,3 +19,8 @@ def read(name):
     if not tag:
         abort(404)
     return render_template('tag/read.html', tag = tag)
+
+@blueprint.route('/tags/')
+def list():
+    tags = db.session.query(Tag)
+    return render_template('tag/list.html', tags = tags)
