@@ -20,8 +20,8 @@ __metaclass__ = Database.DefaultMeta
 
 class Article:
     """Represents an article"""
-    uid = Column(Integer, nullable = False, unique = True)
-    created = Column(DateTime, nullable = False, unique = True)
+    uid = Column(Integer, nullable = False, unique = True, index = True)
+    created = Column(DateTime, nullable = False, unique = True, index = True)
     updated = Column(DateTime, nullable = False)
     published = Column(DateTime, nullable = False, default = func.now())
     evernote_url = Column(String(128), nullable = False, unique = True)
@@ -48,7 +48,7 @@ class Article:
 class BlogEntry(Article):
     """Represents a note in evernote or a blog entry in everblog."""
     snippet = Column(String(128), nullable = False)
-    lang = Column(Enum('en', 'cn'), nullable = False, default = 'en')
+    lang = Column(Enum('en', 'cn'), nullable = False, index = True, default = 'en')
 
     def synchronize(self):
         super(BlogEntry, self).synchronize()
@@ -66,7 +66,7 @@ class Page(Article):
 @Database.many_to_many(Article)
 class Tag:
     """represents a tag in Evernote"""
-    name = Column(String(64), nullable = False, unique = True)
+    name = Column(String(64), nullable = False, index = True, unique = True)
 
 
 Database.register()

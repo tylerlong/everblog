@@ -7,7 +7,7 @@
 """
 from flask import Blueprint, render_template, abort
 from everblog import db
-from everblog.models import Tag
+from everblog.models import Tag, BlogEntry
 
 
 blueprint = Blueprint('tag', __name__)
@@ -19,9 +19,9 @@ def read(name):
     if not tag:
         abort(404)
     return render_template('tag/read.html', tag = tag)
-
+   
 
 @blueprint.route('/tags/')
 def list():
-    tags = db.session.query(Tag).order_by(Tag.name)
+    tags = db.session.query(Tag).join(Tag.articles).join(BlogEntry).group_by(Tag.name).order_by(Tag.name)
     return render_template('tag/list.html', tags = tags)
