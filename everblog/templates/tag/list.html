@@ -6,7 +6,7 @@
 <h1>Tags</h1>
 <ul class="tagcloud">
     {% for tag in tags %}
-    <li><a href="{{ url_for('tag.read', name = tag.name) }}" style="font-size: 100%">{{ tag.name }}</a></li>
+    <li><a href="{{ url_for('tag.read', name = tag.name) }}" style="font-size: {{ 100 * (3 - 10.0/(4 + tag.blog_entrys.count())) }}%">{{ tag.name }}</a></li>
     {% endfor %}
 </ul>
 {% endblock %}

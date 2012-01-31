@@ -20,7 +20,8 @@ def read(name):
         abort(404)
     return render_template('tag/read.html', tag = tag)
 
+
 @blueprint.route('/tags/')
 def list():
-    tags = db.session.query(Tag)
+    tags = db.session.query(Tag).order_by(Tag.name)
     return render_template('tag/list.html', tags = tags)

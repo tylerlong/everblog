@@ -20,7 +20,8 @@ __metaclass__ = Database.DefaultMeta
 
 class Article:
     """Represents an article"""
-    created = Column(DateTime, nullable = False)
+    uid = Column(Integer, nullable = False, unique = True)
+    created = Column(DateTime, nullable = False, unique = True)
     updated = Column(DateTime, nullable = False)
     published = Column(DateTime, nullable = False, default = func.now())
     evernote_url = Column(String(128), nullable = False, unique = True)
@@ -33,8 +34,9 @@ class Article:
         dict_ = json.loads(data.replace('\<', '<').replace('\>', '>'))
         self.title = dict_['title']
         self.content = dict_['content']
-        self.created = datetime.datetime.fromtimestamp(dict_['created']/1000)
-        self.updated = datetime.datetime.fromtimestamp(dict_['updated']/1000)
+        self.uid = dict_['created'] / 1000
+        self.created = datetime.datetime.fromtimestamp(dict_['created'] / 1000)
+        self.updated = datetime.datetime.fromtimestamp(dict_['updated'] / 1000)
         self.tags = []
         if 'tagNames' in dict_:
             for tagName in dict_['tagNames']:
@@ -44,7 +46,7 @@ class Article:
 
 
 class BlogEntry(Article):
-    """Represents a note in evernote or a blog entry in everblog."""    
+    """Represents a note in evernote or a blog entry in everblog."""
     snippet = Column(String(128), nullable = False)
     lang = Column(Enum('en', 'cn'), nullable = False, default = 'en')
 

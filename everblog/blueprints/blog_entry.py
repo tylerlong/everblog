@@ -47,10 +47,10 @@ def list():
     return list_lang(DEFAULT_LANG)
 
 
-@blueprint.route('/<int:id>/', methods = ['GET', ])
-def read(id):
+@blueprint.route('/<int:uid>/', methods = ['GET', ])
+def read(uid):
     """show a blog entry"""
-    blog_entry = db.session.query(BlogEntry).get(id)
+    blog_entry = db.session.query(BlogEntry).filter_by(uid = uid).first()
     if not blog_entry:
         abort(404)
     etag = '"{0}"'.format(hashlib.sha256(str(blog_entry.updated)).hexdigest())
@@ -105,7 +105,7 @@ def lang_feed(lang):
                  content = unicode(blog_entry.content),
                  content_type = 'html',
                  author = app.config['BLOG_OWNER'],
-                 url = urljoin(request.url_root, url_for('blog_entry.read', id = blog_entry.id)),
+                 url = urljoin(request.url_root, url_for('blog_entry.read', uid = blog_entry.uid)),
                  updated = blog_entry.updated,
                  published = blog_entry.created)
     

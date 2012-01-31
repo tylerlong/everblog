@@ -11,7 +11,7 @@
     <tr><th>Title</th><th colspan="2">Actions</th></tr>
 {% for blog_entry in blog_entries %}
     <tr>
-        <td><a href="{{ url_for('blog_entry.read', id = blog_entry.id) }}" target="_blank">{{ blog_entry.title }}</a></td> 
+        <td><a href="{{ url_for('blog_entry.read', uid = blog_entry.uid) }}" target="_blank">{{ blog_entry.title }}</a></td> 
         <td><a href="{{ url_for('article.synchronize', id = blog_entry.id ) }}" target="_blank">sync</a></td>
         <td><a href="{{ url_for('article.delete', id = blog_entry.id ) }}" onclick="return confirm('Are your sure to delete this blog entry?')">delete</a></td>
     </tr>
