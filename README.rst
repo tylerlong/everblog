@@ -4,16 +4,22 @@ EverBlog
 
 Introduction
 ************
-Everblog is named after Evernote, you can publish your Evernote notes to Everblog as blog entries.
-When the notes in Evernote are updated, corresponding blog entries in Everblog are updated automatically.
+
+::
+
+    Everblog is named after Evernote, you can publish your Evernote notes to Everblog as blog entries.
+    When the notes in Evernote are updated, corresponding blog entries in Everblog are updated automatically.
 
 
 
 Why Everblog ?
 **************
-Taking notes and writing blog entries are similar creative activities. You may want to publish some of your notes as blog entries.
-We already have Evernote, a popular note taking application. It would be nice to have a blogging software which integrates well with Evernote.
-Here comes Everblog!
+
+::
+
+    Taking notes and writing blog entries are similar creative activities. You may want to publish some of your notes as blog entries.
+    We already have Evernote, a popular note taking application. It would be nice to have a blogging software which integrates well with Evernote.
+    Here comes Everblog!
 
 
 
@@ -51,19 +57,28 @@ Configuration and Customization
 
 How to deploy ?
 ***************
-The same as deploying any other wsgi based python websites.
+
+::
+
+    The same as deploying any other wsgi based python websites.
 
 
 
 Examples & Demos
 ****************
-My blog: http://tylerlong.me
+
+::
+
+    My blog: http://tylerlong.me
 
 
 
 License
 *******
-Everblog is released under BSD license.
+
+::
+
+    Everblog is released under BSD license.
 
 
 
