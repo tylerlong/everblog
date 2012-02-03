@@ -28,6 +28,7 @@ Features
 
 Quick Start
 ***********
+::
     git clone git://github.com/tylerlong/everblog.git && cd everblog
     pip install -r requires.txt
     python manage.py run_app
@@ -38,6 +39,7 @@ Quick Start
 
 Configuration and Customization
 *******************************
+::
     Most of the configurable items resides in everblog/__init__.py file
     If you want to change the default layout or menu, change everblog/templates/layout.html file
 
@@ -63,5 +65,6 @@ Everblog is released under BSD license.
 
 Feedback
 ********
-Comments, suggestions, questions, free beer, t-shirts, kindles, ipads ... are all welcome!
-Email: everblog.feedback@gmail.com
+::
+    Comments, suggestions, questions, free beer, t-shirts, kindles, ipads ... are all welcome!
+    Email: everblog.feedback@gmail.com
