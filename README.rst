@@ -19,14 +19,33 @@ Here comes Everblog!
 
 Features
 ********
- - simple to setup and simple to use
- - support many databases as backends, such as mysql, sqlite, postgresql... etc.
+ - simple to setup and simple to use.
+ - clear UI and clean HTML5 code.
+ - minimal data storage. Most of the data is stored on third-party services such as Evernote and Disqus.
+ - long-term maintained. I use it to power my own blog and I will continue to develop and maintain it.
+
+
+
+Quick Start
+***********
+git clone git://github.com/tylerlong/everblog.git && cd everblog
+pip install -r requires.txt
+python manage.py run_app
+
+open your browser and navigate to http://localhost:5000
+
+
+
+Configuration and Customization
+*******************************
+Most of the configurable items resides in everblog/__init__.py file
+If you want to change the default layout or menu, change everblog/templates/layout.html file
 
 
 
 How to deploy ?
 ***************
-Please refer to my blog: http://tylerlong.me, there are tutorials.
+The same as deploying any other wsgi based python websites.
 
 
 

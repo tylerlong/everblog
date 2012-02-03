@@ -16,4 +16,4 @@
 
 24. auto generate resume according to the contents of the blog.
 
-25. write dev env set up tutorial in README.rst
+26. 
