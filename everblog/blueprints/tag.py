@@ -3,7 +3,6 @@
     everblog.blueprints.tag
     ~~~~~~~~~~~~~~~~~~~~~~~
     tags for blog entries
-
 """
 from flask import Blueprint, render_template, abort
 from everblog import db

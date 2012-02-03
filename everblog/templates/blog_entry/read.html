@@ -16,4 +16,17 @@ and <a href="{{ url_for('tag.read', name = blog_entry.tags[-1].name) }}">{{ blog
 {%- endif %}
 </p>
 {% endif %}
+<br/>
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'tylerlong';
+    var disqus_identifier = '{{ blog_entry.uid }}';
+    var disqus_url = 'http://tylerlong.me{{ url_for("blog_entry.read", uid = blog_entry.uid) }}';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
 {% endblock %}

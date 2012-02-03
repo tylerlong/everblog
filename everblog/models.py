@@ -1,6 +1,6 @@
 # coding=utf-8
 """
-    wendaren.models
+    everblog.models
     ~~~~~~~~~~~~~~~
     quick_orm database models
 """
