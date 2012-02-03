@@ -16,6 +16,7 @@ from everblog.blueprints import admin_required
 
 DEFAULT_LANG = app.config['DEFAULT_LANG']
 PAGE_SIZE = app.config['PAGE_SIZE']
+DISQUS_SHORTNAME = app.config['DISQUS_SHORTNAME']
 
 blueprint = Blueprint('blog_entry', __name__)
 
@@ -60,7 +61,7 @@ def read(uid):
     if request.headers.get('If-Modified-Since', '') == last_modified:
         return '', 304    
 
-    response = make_response(render_template('blog_entry/read.html', blog_entry = blog_entry))
+    response = make_response(render_template('blog_entry/read.html', blog_entry = blog_entry, disqus_shortname = DISQUS_SHORTNAME))
     response.headers['ETag'] = etag
     response.headers['Last-Modified'] = last_modified
     return response

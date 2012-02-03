@@ -19,9 +19,9 @@ and <a href="{{ url_for('tag.read', name = blog_entry.tags[-1].name) }}">{{ blog
 <br/>
 <div id="disqus_thread"></div>
 <script type="text/javascript">
-    var disqus_shortname = 'tylerlong';
+    var disqus_shortname = '{{ disqus_shortname }}';
     var disqus_identifier = '{{ blog_entry.uid }}';
-    var disqus_url = 'http://tylerlong.me{{ url_for("blog_entry.read", uid = blog_entry.uid) }}';
+    var disqus_url = 'http://' + window.location.host + '{{ url_for("blog_entry.read", uid = blog_entry.uid) }}';
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

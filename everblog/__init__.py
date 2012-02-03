@@ -42,7 +42,9 @@ app.config.update(
     ],
 
     DEFAULT_LANG = 'en',
-    PAGE_SIZE = 8
+    PAGE_SIZE = 8,
+
+    DISQUS_SHORTNAME = 'tylerlong'
 )
 
 db = Database(app.config['CONNECTION_STRING'])
