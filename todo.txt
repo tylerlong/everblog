@@ -8,6 +8,4 @@
 
 18. support full-text searching - index bucket?
 
-19. add sqlite db to git
-
 21. 
