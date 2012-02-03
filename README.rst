@@ -28,18 +28,18 @@ Features
 
 Quick Start
 ***********
-git clone git://github.com/tylerlong/everblog.git && cd everblog
-pip install -r requires.txt
-python manage.py run_app
+    git clone git://github.com/tylerlong/everblog.git && cd everblog
+    pip install -r requires.txt
+    python manage.py run_app
 
-open your browser and navigate to http://localhost:5000
+    open your browser and navigate to http://localhost:5000
 
 
 
 Configuration and Customization
 *******************************
-Most of the configurable items resides in everblog/__init__.py file
-If you want to change the default layout or menu, change everblog/templates/layout.html file
+    Most of the configurable items resides in everblog/__init__.py file
+    If you want to change the default layout or menu, change everblog/templates/layout.html file
 
 
 
