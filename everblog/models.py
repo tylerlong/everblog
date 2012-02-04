@@ -28,6 +28,9 @@ class Article:
     title = Column(String(128), nullable = False)
     content = Column(Text, nullable = False)
 
+    def created_local(self):
+        return self.created + datetime.timedelta(hours = 16)
+
     def synchronize(self):
         data = urllib2.urlopen(self.evernote_url).read().decode('UTF-8')
         data = evernote_data_pattern.search(data).group()
