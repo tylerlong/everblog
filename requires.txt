@@ -1,2 +1,2 @@
 Flask>=0.8
-quick_orm>=0.3.4
+quick_orm>=0.3.5
