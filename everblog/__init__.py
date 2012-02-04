@@ -26,6 +26,8 @@ app.config.update(
     DEBUG = True,
     SECRET_KEY = Encryption.generate_random_string(),
 
+    TIME_ZONE = +8,
+
     CONNECTION_STRING = 'sqlite:///everblog/everblog.db',
 
     ADMIN_USERNAME = 'admin',

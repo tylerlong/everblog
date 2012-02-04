@@ -1,9 +1,5 @@
 9. investigate sharing a folder in Evernote
 
-12. time and time zone, re-think
-    12.1 change timestamp according to the time zone of Evernote's server and China's time zone?
-    12.2 only change the display of web page, don't change the data in database.
-
 16. pagination for admin pages
 
 18. support full-text searching - index bucket?

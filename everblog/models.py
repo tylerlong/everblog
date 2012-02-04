@@ -28,9 +28,6 @@ class Article:
     title = Column(String(128), nullable = False)
     content = Column(Text, nullable = False)
 
-    def created_local(self):
-        return self.created + datetime.timedelta(hours = 16)
-
     def synchronize(self):
         data = urllib2.urlopen(self.evernote_url).read().decode('UTF-8')
         data = evernote_data_pattern.search(data).group()
@@ -38,8 +35,8 @@ class Article:
         self.title = dict_['title']
         self.content = dict_['content']
         self.uid = dict_['created'] / 1000
-        self.created = datetime.datetime.fromtimestamp(dict_['created'] / 1000)
-        self.updated = datetime.datetime.fromtimestamp(dict_['updated'] / 1000)
+        self.created = datetime.datetime.utcfromtimestamp(self.uid)
+        self.updated = datetime.datetime.utcfromtimestamp(dict_['updated'] / 1000)
         self.tags = []
         if 'tagNames' in dict_:
             for tagName in dict_['tagNames']:

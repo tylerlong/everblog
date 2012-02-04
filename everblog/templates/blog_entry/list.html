@@ -5,7 +5,7 @@
 
 {% for blog_entry in items %}
 <div class="entry-overview">
-    <div class="date">{{ blog_entry.created_local() }}</div>
+    <div class="date">{{ blog_entry.created + g.time_zone}}</div>
     <div class="detail">
         <h1><a href="{{ url_for('blog_entry.read', uid = blog_entry.uid) }}">{{ blog_entry.title }}</a></h1>
         <div class="summary"><p>{{ blog_entry.snippet }} ...</p></div>

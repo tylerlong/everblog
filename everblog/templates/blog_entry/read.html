@@ -4,7 +4,7 @@
 
 {% block body %}
 <h1 class="title">{{ blog_entry.title }}</h1>
-<p class="date">created on {{ blog_entry.created }} | updated on {{ blog_entry.updated }}</p>
+<p class="date">created on {{ blog_entry.created + g.time_zone }} | updated on {{ blog_entry.updated + g.time_zone }}</p>
 {{ blog_entry.content|safe }}
 {% if blog_entry.tags.count() > 0 %}
 <p class="tags">This entry was tagged

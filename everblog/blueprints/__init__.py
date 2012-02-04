@@ -4,7 +4,7 @@
     ~~~~~~~~~~~~~~~~~~~
     blueprints for the whole application
 """
-import sys
+import sys, datetime
 from functools import wraps
 from flask import g, redirect, session, url_for
 from toolkit_library.inspector import PackageInspector
@@ -27,10 +27,13 @@ def before_request():
     g.pages = db.session.query(Page).order_by(Page.order)
     g.contacts = app.config['CONTACT_METHODS']
     g.blog_owner = app.config['BLOG_OWNER']
+    g.time_zone = datetime.timedelta(hours = app.config['TIME_ZONE'])
+
 
 def teardown_request(exception = None):
     """called after every request"""
     db.session.remove()
+
 
 packageInspector = PackageInspector(sys.modules[__name__])
 all_blueprints = packageInspector.get_all_modules()
