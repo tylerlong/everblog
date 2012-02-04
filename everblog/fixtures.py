@@ -13,7 +13,6 @@ exec(moduleInspector.import_all_classes_statement())
 
 blog_entries = [
     BlogEntry(evernote_url = 'http://www.evernote.com/shard/s68/sh/f69937b9-7cb1-414d-91ef-baca869dc263/f08695a8be5d370a4aba8ed8e141eb1e'),
-    BlogEntry(evernote_url = 'http://www.evernote.com/shard/s68/sh/6ff8519a-09e0-4e07-81bd-682237f12e59/fb706e50dc761cf7bf5a37b768ac1118'),
     BlogEntry(evernote_url = 'http://www.evernote.com/shard/s68/sh/4d56d15c-250e-448e-8754-d7e17df66afe/72b4b597391d43cdf88948c3ad3c6446'),
 ]
 for blog_entry in blog_entries:
