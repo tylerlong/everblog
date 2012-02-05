@@ -6,8 +6,6 @@
 
 21. add event flow? such as github flow on this man's page: http://scottchacon.com/
 
-22. add google analytics
-
 23. add "todo". create todo items, can mark them as finished or postponed or given up. track the time. write comments. write summary.
 
 24. auto generate resume according to the contents of the blog.

@@ -30,6 +30,7 @@ Features
 - simple to setup and simple to use.
 - clear UI and clean HTML5 code.
 - minimal data storage. Most of the data is stored on third-party services such as Evernote and Disqus.
+- support atom feeds, tag clouds and google analytics.
 - long-term maintained. I use it to power my own blog and I will continue to develop and maintain it.
 
 

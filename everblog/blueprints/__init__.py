@@ -28,6 +28,7 @@ def before_request():
     g.contacts = app.config['CONTACT_METHODS']
     g.blog_owner = app.config['BLOG_OWNER']
     g.time_zone = datetime.timedelta(hours = app.config['TIME_ZONE'])
+    g.google_analytics_tracking_id = app.config['GOOGLE_ANALYTICS_TRACKING_ID']
 
 
 def teardown_request(exception = None):
