@@ -43,6 +43,7 @@ Quick Start
 
     git clone git://github.com/tylerlong/everblog.git && cd everblog
     pip install -r requires.txt
+    python manage.py recreate_tables_then_load_data
     python manage.py run_app
 
 open your browser and navigate to http://localhost:5000
