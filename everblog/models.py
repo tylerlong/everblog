@@ -33,7 +33,7 @@ class Article:
         data = evernote_data_pattern.search(data).group()
         dict_ = json.loads(data.replace('\<', '<').replace('\>', '>'))
         self.title = dict_['title']
-        self.content = dict_['content']
+        self.content = dict_['content'].replace(' src="https://', ' src="http://')
         self.uid = dict_['created'] / 1000
         self.created = datetime.datetime.utcfromtimestamp(self.uid)
         self.updated = datetime.datetime.utcfromtimestamp(dict_['updated'] / 1000)

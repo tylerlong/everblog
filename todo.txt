@@ -10,4 +10,4 @@
 
 24. auto generate resume according to the contents of the blog.
 
-26. 
+27. 
