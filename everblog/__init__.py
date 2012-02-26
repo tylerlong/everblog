@@ -27,6 +27,7 @@ app.config.update(
     SECRET_KEY = Encryption.generate_random_string(),
 
     CONNECTION_STRING = 'sqlite:///everblog/everblog.db',
+    IMAGE_CACHE = 'everblog/everblog.dbm',
 
     ADMIN_USERNAME = 'admin',
     ADMIN_PASSWORD = 'password',

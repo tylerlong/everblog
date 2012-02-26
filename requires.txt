@@ -1,2 +1,3 @@
 Flask>=0.8
-quick_orm>=0.3.5
+quick_orm>=0.3.6
+toolkit_library>=0.4.0

@@ -4,8 +4,9 @@
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Article, base model for page and blog entry.
 """
+import anydbm
 from flask import abort, redirect, url_for, Blueprint
-from everblog import db
+from everblog import db, app
 from everblog.models import Article, Tag
 from everblog.blueprints import admin_required
 
@@ -45,3 +46,15 @@ def delete(id):
         abort(404)
     db.session.delete_then_commit(article)
     return redirect(url_for('admin.index'))
+
+
+@blueprint.route('/image/<key>/')
+def image(key):
+    key = key.encode('ascii')
+    try:
+        dbm = anydbm.open(app.config['IMAGE_CACHE'])
+        if not key in dbm:
+            abort(404)
+        return dbm[key]
+    finally:
+        dbm.close()

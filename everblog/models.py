@@ -4,15 +4,18 @@
     ~~~~~~~~~~~~~~~
     quick_orm database models
 """
-import re, urllib2, json, datetime
+import re, json, datetime, anydbm
 from quick_orm.core import Database
 from sqlalchemy import Column, String, Text, DateTime, func, Integer, Enum
 from toolkit_library.text_converter import TextConverter
-from everblog import db
+from toolkit_library.web_client import WebClient
+from toolkit_library.encryption import Encryption
+from everblog import db, app
 
 
 evernote_data_pattern = re.compile('(?<=Evernote\.WebClient\.Note = )\{.+?\}(?=;\s+?</script>)')
 chinese_character_pattern = re.compile(u'[\u4e00-\u9fa5]')
+img_url_pattern = re.compile(' src="(https?://.+?\.(?:png|jpg|jpeg|gif))"')
 
 
 __metaclass__ = Database.DefaultMeta
@@ -29,11 +32,22 @@ class Article:
     content = Column(Text, nullable = False)
 
     def synchronize(self):
-        data = urllib2.urlopen(self.evernote_url).read().decode('UTF-8')
+        data = WebClient.download_binary(self.evernote_url).decode('UTF-8')
         data = evernote_data_pattern.search(data).group()
         dict_ = json.loads(data.replace('\<', '<').replace('\>', '>'))
         self.title = dict_['title']
-        self.content = dict_['content'].replace(' src="https://', ' src="http://')
+        self.content = dict_['content']
+        match = img_url_pattern.search(self.content)
+        if match:
+            try:
+                dbm = anydbm.open(app.config['IMAGE_CACHE'], 'c')
+                for img_url in match.groups():
+                    key = Encryption.computer_hashcode(img_url)
+                    value = WebClient.download_binary(img_url)
+                    dbm[key] = value
+                    self.content = self.content.replace(img_url, '/image/{0}/'.format(key))
+            finally:
+                dbm.close()
         self.uid = dict_['created'] / 1000
         self.created = datetime.datetime.utcfromtimestamp(self.uid)
         self.updated = datetime.datetime.utcfromtimestamp(dict_['updated'] / 1000)
