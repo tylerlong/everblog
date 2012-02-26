@@ -37,11 +37,11 @@ class Article:
         dict_ = json.loads(data.replace('\<', '<').replace('\>', '>'))
         self.title = dict_['title']
         self.content = dict_['content']
-        match = img_url_pattern.search(self.content)
-        if match:
+        image_urls = img_url_pattern.findall(self.content)
+        if image_urls:
             try:
                 dbm = anydbm.open(app.config['IMAGE_CACHE'], 'c')
-                for img_url in match.groups():
+                for img_url in image_urls:
                     key = Encryption.computer_hashcode(img_url)
                     value = WebClient.download_binary(img_url)
                     dbm[key] = value
