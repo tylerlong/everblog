@@ -26,7 +26,7 @@ app.config.update(
     DEBUG = True,
     SECRET_KEY = Encryption.generate_random_string(),
 
-    CONNECTION_STRING = 'sqlite:///everblog/everblog.db',
+    CONNECTION_STRING = 'postgresql://tyler:123456@localhost/everblog',
     IMAGE_CACHE = 'everblog/everblog.dbm',
 
     ADMIN_USERNAME = 'admin',

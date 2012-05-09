@@ -62,7 +62,7 @@ class Article:
 class BlogEntry(Article):
     """Represents a note in evernote or a blog entry in everblog."""
     snippet = Column(String(128), nullable = False)
-    lang = Column(Enum('en', 'cn'), nullable = False, index = True, default = 'en')
+    lang = Column(Enum('en', 'cn', name = 'language_code'), nullable = False, index = True, default = 'en')
 
     def synchronize(self):
         super(BlogEntry, self).synchronize()
