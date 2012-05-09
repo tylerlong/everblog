@@ -4,7 +4,7 @@
     ~~~~~~
     Like Django's manage.py, but simpler. Provides useful commands to manage the project
 """
-import sys, subprocess
+import os, sys, subprocess
 from everblog import db
 
 
@@ -17,7 +17,7 @@ def drop_tables():
     """Drop all tables in database"""
     db.drop_tables()
     print 'Tables dropped'
-    
+
 
 def create_tables():
     """Create tables according to models"""
@@ -51,7 +51,8 @@ def run_app():
     if len(sys.argv) < 2:
         subprocess.call([sys.executable, 'manage.py', 'run_app'])
     else:
-        app.run(host = '0.0.0.0')
+        port = int(os.environ.get('PORT', 5000))
+        app.run(host='0.0.0.0', port = port)
 
 
 if __name__ == '__main__':
