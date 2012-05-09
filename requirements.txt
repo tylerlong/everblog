@@ -1,0 +1,7 @@
+Flask==0.8
+Jinja2==2.6
+SQLAlchemy==0.7.7
+Werkzeug==0.8.3
+quick-orm==0.4.2
+toolkit-library==0.4.0
+wsgiref==0.1.2
