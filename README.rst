@@ -68,7 +68,7 @@ I wrote a tutorial(In Chinese): http://www.tylerlong.me/1336566394/
 
 Examples & Demos
 ----------------
-http://everblog.herokuapp.com
+http://everblog.herokuapp.com, administrator account & password: admin/password
 
 
 |
